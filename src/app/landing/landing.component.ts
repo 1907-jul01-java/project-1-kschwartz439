@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Session } from 'inspector';
 import { AuthService } from '../auth/auth.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -17,16 +16,16 @@ export class LandingComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.AuthService.logout();
     this.loginForm = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
     });
+    
   }
 
   signout(){
     //TODO:Figure out authentication services with angular
-    this.AuthService.logout()
+    //sessionStorage.clear();
   }
 
 }

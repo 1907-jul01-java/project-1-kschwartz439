@@ -10,6 +10,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ReimbursementComponent } from './reimbursement/reimbursement.component';
 import { UploadComponent } from './upload/upload.component';
 import { LandingComponent } from './landing/landing.component';
+//import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LandingComponent } from './landing/landing.component';
     SignupComponent,
     ReimbursementComponent,
     UploadComponent,
-    LandingComponent
+    LandingComponent,
+    //PostsComponent
   ],
   imports: [
     BrowserModule,
