@@ -11,9 +11,12 @@ import { Post2 } from '../Post2';
 export class AuthService {
   constructor(private httpClient:HttpClient) { }
 
+  //Check with Mehrab here - this is for the server, but what's my url for my servlet? 2 different applications
+  url = "jdbc:postgresql://192.168.99.100:5432/postgresql";
+
   login(username: string, password: string): Observable<Post[]> {
     //doGet with an option to fail to find a username
-    return this.httpClient.get<Post[]>(placeholderForDAOLocation);
+    return this.httpClient.get<Post[]>(this.url);
   }
 
   signup(username: string, password: string, firstName: string, lastName: string, email: string): Observable<Post2[]>{
@@ -22,6 +25,6 @@ export class AuthService {
     //This should work. \/
     this.login(username, password);
     //doPost or doPut to update the database
-    return this.httpClient.post<Post2[]>(placeholderForDAOLocation, null);
+    return this.httpClient.post<Post2[]>(this.url, null);
   }
 }
