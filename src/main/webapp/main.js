@@ -1,36 +1,35 @@
-let movies = [];
-let moviesElement = document.querySelector('#movies');
-
-function ListMovies(movies) {
-    return `<table>
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Year</th>
-                </tr>
-                ${movies.map(ListMovie).join('')}
-            </table>`;
-}
-
-function ListMovie(movie) {
-    return `<tr>
-                <td>${movie.id}</td>
-                <td>${movie.title}</td>
-                <td>${movie.year}</td>
-            </tr>`;
-}
-
-function updateMoviesElement() {
-    moviesElement.innerHTML = ListMovies(movies);
-}
-
-function getMovies() {
+function login() {
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    var param = "username="+username+"&password="+password;
     let xhr = new XMLHttpRequest();
-    xhr.open('get', 'v1/movies/');
-    xhr.onload = function() { 
-        movies = JSON.parse(xhr.responseText); 
-        updateMoviesElement();
-    };
-    xhr.send();
+    xhr.open('POST', "http://localhost:8080/movie-api/login", true);
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState == 4 && xhr.status == 200){
+            var JSONObject = xhr.responseText;
+            if (JSONObject == "false"){
+                window.location("http://localhost:8080/movie-api");
+            }
+            if (JSONObject == "employee"){
+                window.location("http://localhost:8080/movie-api/employee.html");
+            }
+            if (JSONObject == "manager" || JSONObject == "admin"){
+                window.location("http://localhost:8080/movie-api/manager.html");
+            }
+        }
+    }
+    console.log("I got here.");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urelencoded");
+    xhr.send(encodeURI(param));
 }
 
+let WelcomeElement = document.getElementById("Welcome");
+
+function returnUser(user){
+    WelcomeElement.innerHTML(`Welcome, ${user.firstName} ${user.lastName}`);
+}
+
+function Logout(){
+    sessionStorage.clear();
+    window.location.assign("http://localhost:8080/movie-api");
+}

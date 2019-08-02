@@ -2,18 +2,18 @@
 A Mavenized Java 8 web application connected to a PostgreSQL database. Submit a README.md with a proposal that matches most requirements below. You may use the example proposal below for reference, or as your project itself.
 
 ### Tools & APIs
-- [] Java SE 8
-- [] Maven 3+
-- [] JDBC 4+
-- [] PostgreSQL 9+
-- [] Servlet 2.5+
-- [] Tomcat 7+
-- [] HTML/JS/CSS
+- [x] Java SE 8
+- [x] Maven 3+
+- [x] JDBC 4+
+- [x] PostgreSQL 9+
+- [x] Servlet 2.5+
+- [x] Tomcat 7+
+- [x] HTML/JS/CSS
 - [] AJAX
 - [] JUnit 4
 - [] log4j 
 - [] Optional:
-    - [] Docker, Docker-Compose
+    - [x] Docker, Docker-Compose
     - [] Angular 8
     - [] Bootstrap
     - [] Remote hosting (AWS EC2/RDS)
@@ -24,12 +24,12 @@ A Mavenized Java 8 web application connected to a PostgreSQL database. Submit a 
 - [] Anemic/DDD package & class structure
 - [] Design Patterns:
     - [] Dependency Injection
-    - [] Data Access Object
+    - [x] Data Access Object
     - [] Business Delegate
     - [] Model-View-Controller
-    - [] Front Controller
-- [] SQL Normalization
-- [] PL/pgSQL
+    - [x] Front Controller
+- [x] SQL Normalization
+- [x] PL/pgSQL
 - [] Optional:
     - [] Single Page Application
 
@@ -47,8 +47,8 @@ A Mavenized Java 8 web application connected to a PostgreSQL database. Submit a 
 
 ## Example: Expense Reimbursement System
 - An Employee...
-    - [] can login
-    - [] can view the Employee Homepage
+    - [x] can login
+    - [x] can view the Employee Homepage
     - [] can logout
     - [] can submit a reimbursement request
     - [] can upload an image of his/her receipt as part of the reimbursement request
@@ -59,8 +59,8 @@ A Mavenized Java 8 web application connected to a PostgreSQL database. Submit a 
     - [] receives an email when one of their reimbursement requests is resolved (optional)
 
 - A Manager...
-    - [] can login
-    - [] can view the Manager Homepage
+    - [x] can login
+    - [x] can view the Manager Homepage
     - [] can logout
     - [] can approve/deny pending reimbursement requests
     - [] can view all pending requests from all employees

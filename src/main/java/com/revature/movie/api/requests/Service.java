@@ -1,14 +1,10 @@
-package com.revature.movie.api.domain;
-
-import java.util.List;
+package com.revature.movie.api.requests;
 
 /**
  * Service
  */
 public interface Service<E> {
     void insert(E e);
-
-    List<E> getAll();
 
     void update();
 

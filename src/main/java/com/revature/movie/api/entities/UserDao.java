@@ -4,15 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.revature.movie.api.domain.User;
+import com.revature.movie.api.users.User;
 
-/**
- * MovieDao
- */
 public class UserDao implements Dao<User> {
     Connection connection;
     
@@ -23,34 +17,18 @@ public class UserDao implements Dao<User> {
     @Override
     public void insert(User user) {
         try {
-            PreparedStatement pStatement = connection.prepareStatement("insert into users(firstName, lastName, userId) values(?, ?, ?)");
+            PreparedStatement p2Statement = connection.prepareStatement("insert into logins(username, password) values (?, ?)");
+            p2Statement.setString(1, user.getUsername());
+            p2Statement.setString(2, user.getPassword());
+            p2Statement.executeUpdate();
+            PreparedStatement pStatement = connection.prepareStatement("insert into users(firstName, lastName, usersName) values(?, ?, ?)");
             pStatement.setString(1, user.getFirstName());
             pStatement.setString(1, user.getLastName());
-            pStatement.setInt(3, user.getUserId());
+            pStatement.setString(3, user.getUsername());
             pStatement.executeUpdate();
         } catch (SQLException e) {
 
         }
-    }
-
-    @Override
-    public List<User> getAll() {
-        User user;
-        List<User> users = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from movies");
-            while (resultSet.next()) {
-                user = new User();
-                user.setLastName(resultSet.getString("lastName"));
-                user.setFirstName(resultSet.getString("firstName"));
-                user.setUserId(resultSet.getInt("userId"));
-                user.add(user);
-            }
-        } catch (SQLException e) {
-
-        }
-        return users;
     }
 
     @Override
@@ -62,4 +40,24 @@ public class UserDao implements Dao<User> {
     public void delete() {
 
     }
+
+	public User getUserObject(String username) {
+        User user = null;
+        try {
+            PreparedStatement pStatement = connection.prepareStatement("SELECT * FROM users INNER JOIN logins ON users.usersName = logins.username WHERE logins.username = ?");
+            pStatement.setString(1, username);
+            ResultSet pResultSet = pStatement.executeQuery();
+            while (pResultSet.next()){
+                String uname = pResultSet.getString("username");
+                String password = pResultSet.getString("password");
+                String access = pResultSet.getString("access");
+                String firstName = pResultSet.getString("firstName");
+                String lastName = pResultSet.getString("lastName");
+                user = new User(uname, password, access, firstName, lastName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+	}
 }

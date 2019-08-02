@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <script src='main.js'></script>
+    <script>$(function () { $("output").load("login.html"); });</script>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Movies API</title>
+    <title>Reimbursement API</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
 </head>
-<body onload="titleBar()">
-    <h1>Welcome to the Employee Reimbursement System</h1>
-    <div id="output" onload="landing.html"></div>
-    <script src='main.js'></script>
+
+<body style="text-align: center">
+    <div>
+        <h1>Welcome to the Employee Reimbursement System</h1>
+        <h3>Login</h3>
+        <p>Username: </p><br/>
+        <input id="username"><br/>
+        <p>Password: </p>
+        <input id="password"><br/><br/>
+        <input type="button" value="Login" onclick="login()"><br/><br/>
+        <a href="/movie-api/signup.html">Sign Up</a>
+    </div>
 </body>
+
 </html>

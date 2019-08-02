@@ -1,12 +1,7 @@
-package com.revature.movie.api.domain;
-
-import java.util.List;
+package com.revature.movie.api.users;
 
 import com.revature.movie.api.entities.Dao;
 
-/**
- * MovieService
- */
 public class UserService implements Service<User> {
     private Dao<User> dao;
 
@@ -17,11 +12,6 @@ public class UserService implements Service<User> {
     @Override
     public void insert(User user) {
         this.dao.insert(user);
-    }
-
-    @Override
-    public List<User> getAll() {
-        return dao.getAll();
     }
 
     @Override
