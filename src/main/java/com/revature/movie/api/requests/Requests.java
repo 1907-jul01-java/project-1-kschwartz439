@@ -11,8 +11,9 @@ public class Requests {
     private String requestType;
     private double cost;
     private String requestDescription;
-    private String imageLocation;
+    //private String imageLocation;
     private String username = user.getUsername();
+    private String approved;
 
     public User getUser() {
         return user;
@@ -54,13 +55,13 @@ public class Requests {
         this.requestDescription = requestDescription;
     }
 
-    public String getImageLocation() {
+    /*public String getImageLocation() {
         return imageLocation;
     }
 
     public void setImageLocation(String imageLocation) {
         this.imageLocation = imageLocation;
-    }
+    }*/
 
     public Requests() {
     }
@@ -70,35 +71,48 @@ public class Requests {
     }
 
     public void setUsername(String username) {
+        user = this.getUser();
+        user.setUsername(username);
         this.username = username;
     }
 
     @Override
     public String toString() {
-        return "Requests [cost=" + cost + ", imageLocation=" + imageLocation + ", requestDescription="
+        return "Requests [cost=" + cost +/* ", imageLocation=" + imageLocation + */", requestDescription="
                 + requestDescription + ", requestName=" + requestName + ", requestType=" + requestType + ", user="
                 + user + ", username=" + username + "]";
     }
 
-    public Requests(User user, String requestName, String requestType, double cost, String requestDescription,
-            String imageLocation, String username) {
-        this.user = user;
+    public Requests(String requestName, String requestType, double cost, String requestDescription,/*
+            String imageLocation,*/ String username, String approved) {
         this.requestName = requestName;
         this.requestType = requestType;
         this.cost = cost;
         this.requestDescription = requestDescription;
-        this.imageLocation = imageLocation;
+        //this.imageLocation = imageLocation;
         this.username = username;
+        this.approved = approved;
+    }
+
+    
+
+    public String getApproved() {
+        return approved;
+    }
+
+    public void setApproved(String approved) {
+        this.approved = approved;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((approved == null) ? 0 : approved.hashCode());
         long temp;
         temp = Double.doubleToLongBits(cost);
         result = prime * result + (int) (temp ^ (temp >>> 32));
-        result = prime * result + ((imageLocation == null) ? 0 : imageLocation.hashCode());
+        //result = prime * result + ((imageLocation == null) ? 0 : imageLocation.hashCode());
         result = prime * result + ((requestDescription == null) ? 0 : requestDescription.hashCode());
         result = prime * result + ((requestName == null) ? 0 : requestName.hashCode());
         result = prime * result + ((requestType == null) ? 0 : requestType.hashCode());
@@ -116,13 +130,18 @@ public class Requests {
         if (getClass() != obj.getClass())
             return false;
         Requests other = (Requests) obj;
+        if (approved == null) {
+            if (other.approved != null)
+                return false;
+        } else if (!approved.equals(other.approved))
+            return false;
         if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
             return false;
-        if (imageLocation == null) {
+        /*if (imageLocation == null) {
             if (other.imageLocation != null)
                 return false;
         } else if (!imageLocation.equals(other.imageLocation))
-            return false;
+            return false;*/
         if (requestDescription == null) {
             if (other.requestDescription != null)
                 return false;

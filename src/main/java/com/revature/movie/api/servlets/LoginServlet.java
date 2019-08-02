@@ -19,11 +19,14 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
+        System.out.println("this"+username);
+        System.out.println("great"+password);
         try {
             setSession(req, resp);
-            User user = getUser(username);
+            User user = getUser(username, password);
             if (user != null) {
                 String result = user.getAccess();
+                resp.setContentType("text/html");
                 resp.getWriter().write(result);
             } else if (user == null) {
                 String result = "false";
@@ -37,7 +40,8 @@ public class LoginServlet extends HttpServlet {
 
     public void setSession(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String username = request.getParameter("userName");
-        User user = getUser(username);
+        String password = request.getParameter("password");
+        User user = getUser(username, password);
         HttpSession session = request.getSession(false);
         if (username == null) {
             if (session == null)
@@ -52,10 +56,10 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    private User getUser(String username) {
+    private User getUser(String username, String password) {
         ConnectionUtil connection = new ConnectionUtil();
         UserDao uDao = new UserDao(connection.getConnection());
-        User user = uDao.getUserObject(username);
+        User user = uDao.getUserObject(username, password);
         connection.close();
         return user;
     }

@@ -1,9 +1,10 @@
-drop table if exists request;
+drop table if exists requests;
 drop table if exists users;
 drop table if exists logins;
 create table logins(username varchar primary key, password varchar not null, access varchar not null);
-create table users(firstName varchar not null, lastName varchar not null, usersName varchar references username primary key);
-create table requests(requestName varchar not null, requestType varchar not null, cost money not null, requestDescription varchar, imageLocation filestream, rUsersname varchar references username not null, requestId serial primary key);
+create table users(userId serial primary key, firstName varchar not null, lastName varchar not null, usersName varchar references logins(username));
+create table requests(requestId serial primary key, requestName varchar not null, requestType varchar not null, cost numeric(10,2) not null, requestDescription varchar, rUsersname varchar references logins(username), approved varchar not null);
 
-insert into logins(KellyAD, p4ssw0rd, admin);
-insert into users(Kelly, Schwartz, KellyAD);
+insert into logins(username, password, access) values("KellyAD", "p4ssw0rd", "admin");
+insert into users(firstName, lastName, usersName) values("Kelly", "Schwartz", "KellyAD");
+insert into requests(requestName, requestType, cost, rUsername, approved) values("testRequest", "testType", 20.00, "KellyAD", "pending");

@@ -1,0 +1,25 @@
+<html>
+    <head></head>
+    <body style="text-align: center" onload="returnUser(user)">
+        <h2>Request Homepage</h2>
+        <p id="Welcome"></p>
+        <form action="/request" method="POST">
+            <label for="requestName">Request Name:</label>
+            <input id="requestName" type="text" name="requestName">
+            <br/>
+            <label for="requestName">Request Type:</label>
+            <input id="requestType" type="text" name="Request Type">
+            <br/>
+            <label for="requestName">Request Name:</label>
+            <input for="cost" type="number" name="Cost">
+            <br/>
+            <label for="requestName">Request Description:</label>
+            <input for="requestDescription" type="text" name="Request Description">
+            <br/>
+            <label for="image">Image:</label>
+            <input for="image" type="image" name="image">
+        </form>
+        <input type="button" value="Submit" onclick="Submit()">
+    </body>
+    <script src="request.js"></script>
+</html>

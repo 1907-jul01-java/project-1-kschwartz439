@@ -1,5 +1,7 @@
 package com.revature.movie.api.requests;
 
+import java.util.List;
+
 import com.revature.movie.api.entities.Dao;
 
 public class RequestService implements Service<Requests> {
@@ -23,5 +25,9 @@ public class RequestService implements Service<Requests> {
     public void delete() {
 		
     }
+
+	public List<Requests> getAll(String username) {
+		return dao.getAll(username);
+	}
 
 }

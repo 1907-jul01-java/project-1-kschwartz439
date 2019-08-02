@@ -12,16 +12,25 @@
 </head>
 
 <body style="text-align: center">
-    <div>
+   <!-- <div>
         <h1>Welcome to the Employee Reimbursement System</h1>
         <h3>Login</h3>
         <p>Username: </p><br/>
-        <input id="username"><br/>
+        <input type="text" id="username"><br/>
         <p>Password: </p>
-        <input id="password"><br/><br/>
+        <input type="text" id="password"><br/><br/>
         <input type="button" value="Login" onclick="login()"><br/><br/>
         <a href="/movie-api/signup.html">Sign Up</a>
-    </div>
+    </div>-->
+    <form action="login" method="POST">
+        <h1>Welcome to the Employee Reimbursement System</h1>
+        <h3>Login</h3>
+        <p>Username: </p><br/>
+        <input type="text" id="username" name="username"><br/>
+        <p>Password: </p>
+        <input type="text" id="password" name="password"><br/><br/>
+        <input type="submit" value "Login" onclick="login()"><br/><br/>
+    </form>
 </body>
 
 </html>
