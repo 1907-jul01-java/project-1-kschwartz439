@@ -2,14 +2,15 @@
     "java.configuration.updateBuildConfiguration": "automatic",
     "sqltools.connections": [
         {
+            "askForPassword": false,
             "connectionTimeout": 30,
-            "database": "postgres",
+            "database": "reimbursement",
             "dialect": "PostgreSQL",
             "name": "reimbursement",
             "password": "postgres",
             "port": 5432,
             "server": "192.168.99.100",
-            "username": "postgres"
+            "username": "reimbursement"
         }
     ]
 }

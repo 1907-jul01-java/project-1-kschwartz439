@@ -5,7 +5,7 @@ function login() {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', "http://localhost:8080/movie-api/login", true);
     xhr.onreadystatechange = function(){
-        if (xhr.readyState == 4 && xhr.status == 200){
+        if (xhr.readyState == 4 && xhr.status == 202){
             var JSONObject = xhr.responseText;
             if (JSONObject == "false"){
                 window.location.assign("http://localhost:8080/movie-api");

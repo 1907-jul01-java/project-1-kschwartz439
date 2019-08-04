@@ -62,7 +62,7 @@ public class User {
                 + access + ", username=" + username + "]";
     }
 
-    public User(String access, String firstName, String lastName, String password, String username) {
+    public User(String username, String password, String access, String firstName, String lastName) {
         this.access = access;
         this.firstName = firstName;
         this.lastName = lastName;

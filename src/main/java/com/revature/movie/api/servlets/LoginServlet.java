@@ -23,9 +23,16 @@ public class LoginServlet extends HttpServlet {
             setSession(req, resp);
             User user = getUser(username, loginpass);
             if (user != null) {
-                String result = user.getAccess();
                 resp.setContentType("text/html");
-                resp.getWriter().write(result);
+                resp.setStatus(202);
+                resp.getWriter().write(user.getAccess());
+                if (user.getAccess()=="employee"){
+                    resp.sendRedirect("employee.html");
+                }
+                if (user.getAccess()=="admin"||user.getAccess()=="manager"){
+                    resp.sendRedirect("manager.html");
+                }
+                resp.getWriter().write(resp.getStatus());
             } else if (user == null) {
                 String result = "false";
                 resp.setContentType("text/html");

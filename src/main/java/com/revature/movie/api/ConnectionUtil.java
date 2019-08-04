@@ -28,7 +28,7 @@ public class ConnectionUtil {
             //     )
             // );
             this.url = "jdbc:postgresql://192.168.99.100:5432/reimbursement";//properties.getProperty("url");
-            this.user = "postgres";//properties.getProperty("user");
+            this.user = "reimbursement";//properties.getProperty("user");
             this.password = "postgres";//properties.getProperty("password");
         } /*catch (IOException e) {
             e.getMessage();
