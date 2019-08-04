@@ -1,45 +1,48 @@
 function login() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
-    var param = "username="+username+"&password="+password;
+    var param = "username=" + username + "&password=" + password;
     let xhr = new XMLHttpRequest();
     xhr.open('POST', "http://localhost:8080/movie-api/login", true);
-    xhr.onreadystatechange = function(){
-        if (xhr.readyState == 4 && xhr.status == 202){
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 202) {
             var JSONObject = xhr.responseText;
-            if (JSONObject == "false"){
+            if (JSONObject == "false") {
                 window.location.assign("http://localhost:8080/movie-api");
             }
-            if (JSONObject == "employee"){
+            if (JSONObject == "employee") {
                 window.location.assign("http://localhost:8080/movie-api/employee.html");
             }
-            if (JSONObject == "manager" || JSONObject == "admin"){
+            if (JSONObject == "manager" || JSONObject == "admin") {
                 window.location.assign("http://localhost:8080/movie-api/manager.html");
             }
         }
     }
-    console.log("I got here.");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urelencoded");
     xhr.send(param);
 }
 
-let WelcomeElement = document.getElementById("Welcome");
+let WelcomeElement = document.querySelector('#WelcomeM');
 
-function returnUser(user){
-    WelcomeElement.innerHTML(`Welcome, ${user.firstName} ${user.lastName}`);
+function updateWelcomeElement() {
+    WelcomeElement.innerHTML = ElementWelcome();
+}   
+
+function ElementWelcome(){
+    return `Welcome ${user.firstName} ${user.lastName}`;
 }
 
-function Logout(){
+function Logout() {
     sessionStorage.clear();
     window.location.assign("http://localhost:8080/movie-api");
 }
 
-function Signup(){
+function Signup() {
     let username = document.getElementById("username");
     let password = document.getElementById("password");
     let firstName = document.getElementById("firstName");
     let lastName = document.getElementById("lastName");
-    var param = "username="+username+"password="+password+"firstName="+firstName+"lastName="+lastName;
+    var param = "username=" + username + "password=" + password + "firstName=" + firstName + "lastName=" + lastName;
     let xhr = new XMLHttpRequest();
     xhr.open('PUT', "http://localhost:8080/movie-api/signup", true);
     xhr.setRequestHeader("Content-type", "application-x-www-form-urlencoded");

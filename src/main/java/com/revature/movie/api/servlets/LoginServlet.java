@@ -22,24 +22,33 @@ public class LoginServlet extends HttpServlet {
         try {
             setSession(req, resp);
             User user = getUser(username, loginpass);
+            String access = user.getAccess();
+            if (access.isEmpty()){
+                req.getRequestDispatcher("index.html").forward(req, resp);
+            }
             if (user != null) {
                 resp.setContentType("text/html");
                 resp.setStatus(202);
-                resp.getWriter().write(user.getAccess());
-                if (user.getAccess()=="employee"){
-                    resp.sendRedirect("employee.html");
+                if (access.equals("admin")){
+                    req.getRequestDispatcher("manager.html").forward(req, resp);
                 }
-                if (user.getAccess()=="admin"||user.getAccess()=="manager"){
-                    resp.sendRedirect("manager.html");
+                if (access.equals("manager")){
+                    req.getRequestDispatcher("manager.html").forward(req, resp);
                 }
-                resp.getWriter().write(resp.getStatus());
-            } else if (user == null) {
-                String result = "false";
-                resp.setContentType("text/html");
-                resp.getWriter().write(result);
-            }
+                if (access.equals("employee")){
+                    req.getRequestDispatcher("employee.html").forward(req, resp);
+                }
+                //req.getRequestDispatcher("manager.html").forward(req, resp);
+            }// else if (user == null) {
+            //     String result = "false";
+            //     resp.setContentType("text/html");
+            //     resp.getWriter().write(result);
+            // }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            e.printStackTrace();
+            req.getRequestDispatcher("index.html").forward(req, resp);
         }
     }
 
