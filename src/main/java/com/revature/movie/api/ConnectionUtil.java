@@ -20,19 +20,19 @@ public class ConnectionUtil {
     public ConnectionUtil() {
         try {
             Class.forName("org.postgresql.Driver");
-            Properties properties = new Properties();
-            properties.load(new FileReader(
-                    new File(
-                        getClass().getClassLoader().getResource("application.properties").getFile()
-                    )
-                )
-            );
-            this.url = properties.getProperty("url");
-            this.user = properties.getProperty("user");
-            this.password = properties.getProperty("password");
-        } catch (IOException e) {
+            // Properties properties = new Properties();
+            // properties.load(new FileReader(
+            //         new File(
+            //             getClass().getClassLoader().getResource("application.properties").getFile()
+            //         )
+            //     )
+            // );
+            this.url = "jdbc:postgresql://192.168.99.100:5432/reimbursement";//properties.getProperty("url");
+            this.user = "postgres";//properties.getProperty("user");
+            this.password = "postgres";//properties.getProperty("password");
+        } /*catch (IOException e) {
             e.getMessage();
-        } catch (ClassNotFoundException e) {
+        }*/ catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

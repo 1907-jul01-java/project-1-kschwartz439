@@ -70,7 +70,7 @@ public class UserDao implements Dao<User> {
         User user = null;
         try {
             PreparedStatement pStatement = connection.prepareStatement(
-                    "SELECT * FROM users JOIN logins ON users.usersName = logins.username WHERE logins.username = ? AND logins.password = ?");
+                    "SELECT * FROM users JOIN logins ON users.usersName = logins.username WHERE logins.username = ? AND logins.loginpass = ?");
             pStatement.setString(1, username);
             pStatement.setString(2, password);
             ResultSet pResultSet = pStatement.executeQuery();

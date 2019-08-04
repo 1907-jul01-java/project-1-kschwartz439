@@ -18,12 +18,10 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        System.out.println("this"+username);
-        System.out.println("great"+password);
+        String loginpass = req.getParameter("password");
         try {
             setSession(req, resp);
-            User user = getUser(username, password);
+            User user = getUser(username, loginpass);
             if (user != null) {
                 String result = user.getAccess();
                 resp.setContentType("text/html");
@@ -40,8 +38,8 @@ public class LoginServlet extends HttpServlet {
 
     public void setSession(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String username = request.getParameter("userName");
-        String password = request.getParameter("password");
-        User user = getUser(username, password);
+        String loginpass = request.getParameter("password");
+        User user = getUser(username, loginpass);
         HttpSession session = request.getSession(false);
         if (username == null) {
             if (session == null)
