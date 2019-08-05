@@ -114,9 +114,10 @@ public class UserDao implements Dao<User> {
     public void setUserObject(String username, String password, String firstName, String lastName) {
         try {
             PreparedStatement pStatement = connection
-                    .prepareStatement("insert into logins (username, password, access) values (?, ?, 'employee')");
+                    .prepareStatement("insert into logins (username, loginpass, access) values (?, ?, ?)");
             pStatement.setString(1, username);
             pStatement.setString(2, password);
+            pStatement.setString(3, "employee");
             pStatement.executeUpdate();
             PreparedStatement pStatement2 = connection
                     .prepareStatement("insert into users (firstName, lastName, usersName) values (?, ?, ?)");

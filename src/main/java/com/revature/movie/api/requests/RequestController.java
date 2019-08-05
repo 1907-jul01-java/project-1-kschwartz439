@@ -18,16 +18,12 @@ import javax.ws.rs.core.MediaType;
 import com.revature.movie.api.ConnectionUtil;
 import com.revature.movie.api.entities.RequestDao;
 
-/**
- * MovieController
- * 
- */
 @Path(value = "request")
 public class RequestController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Requests> getAllMoviesJSON(String username) {
+	public List<Requests> getAllRequestsJSON(String username) {
 		List<Requests> requests = null;
 
 		try (Connection connection = new ConnectionUtil().getConnection()) {
@@ -44,12 +40,12 @@ public class RequestController {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_HTML)
-	public void insertMovie(@FormParam("requestName") String requestName, @FormParam("requestType") String requestType, @FormParam("cost") double cost, @FormParam("requestDescription") String requestDescription, @FormParam("imageLocation") String imageLocation, @FormParam("username") String username, @FormParam("approved") String approved,
+	public void insertRequest(@FormParam("requestName") String requestName, @FormParam("requestType") String requestType, @FormParam("cost") double cost, @FormParam("requestDescription") String requestDescription, @FormParam("username") String username,
 			@Context HttpServletResponse resp) throws IOException {
 		try (Connection connection = new ConnectionUtil().getConnection()) {
 			RequestDao dao = new RequestDao(connection);
 			RequestService service = new RequestService(dao);
-			service.insert(new Requests(requestName, requestType, cost, requestDescription, /*imageLocation, */username, approved));
+			service.insert(new Requests(requestName, requestType, cost, requestDescription, username));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

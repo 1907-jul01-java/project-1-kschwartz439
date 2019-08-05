@@ -20,4 +20,20 @@
     <servlet-name>SignUpServlet</servlet-name>
     <url-pattern>/signup</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>RequestServlet</servlet-name>
+    <servlet-class>com.revature.movie.api.servlets.RequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequestServlet</servlet-name>
+    <url-pattern>/requests</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SubmitServlet</servlet-name>
+    <servlet-class>com.revature.movie.api.servlets.SubmitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitServlet</servlet-name>
+    <url-pattern>/submit</url-pattern>
+  </servlet-mapping>
 </web-app>

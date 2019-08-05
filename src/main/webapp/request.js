@@ -1,14 +1,45 @@
-function Submit(){
-    let requestName = document.getElementById("requestName");
-    let requestType = document.getElementById("requestType");
-    let cost = document.getElementById("cost");
-    let requestDescription = document.getElementById("requestDescription");
-    let image = document.getElementById("image");
-    let approved = "pending";
-    var param = "requestName="+requestName+"requestType="+requestType+"cost="+cost+"requestDescription="+requestDescription+"image="+image+"approved="+approved;
+function Submit() {
+    let requestName = document.getElementById("requestName").value;
+    let requestType = document.getElementById("requestType").value;
+    let cost = document.getElementById("cost").value;
+    let requestDescription = document.getElementById("requestDescription").value;
+    let username = localStorage.getItem("username");
+    var param = "requestName=" + requestName + "requestType=" + requestType + "cost=" + cost + "requestDescription=" + requestDescription+"username="+username;
     let xhr = new XMLHttpRequest();
-    xhr.open('PUT', "http://localhost:8080/movie-api/request", true);
+    xhr.open('POST', "http://localhost:8080/movie-api/submit", true);
     xhr.setRequestHeader("Content-Type", "application-x-www-form-urlencoded");
-    xhr.send(encodeURI(param));
+    xhr.send(param);
     window.location.assign("http://localhost:8080/movie-api/request.html")
+}
+
+let requests = [];
+let RequestElement = document.querySelector('#WelcomeM')
+
+function ShowRequests() {
+    return `<tr>
+                <td>${requests.requestName}</td>
+                <td>${requests.requestType}</td>
+                <td>${requests.cost}</td>
+                <td>${requests.requestDescription}</td>
+            </tr>`
+}
+
+function ShowListRequests() {
+    return `<table>
+            <tr>
+                <th>Request Name:</th>
+                <th>Request Type:</th>
+                <th>Cost:</th>
+                <th>Request Description:</th>
+            </tr>
+            ${requests.map(ShowRequests).join('')}
+        </table>`;
+}
+
+function ShowRequestsManager() {
+
+}
+
+function UpdateApproved() {
+
 }

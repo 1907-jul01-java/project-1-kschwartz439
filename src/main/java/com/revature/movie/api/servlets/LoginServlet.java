@@ -38,12 +38,7 @@ public class LoginServlet extends HttpServlet {
                 if (access.equals("employee")){
                     req.getRequestDispatcher("employee.html").forward(req, resp);
                 }
-                //req.getRequestDispatcher("manager.html").forward(req, resp);
-            }// else if (user == null) {
-            //     String result = "false";
-            //     resp.setContentType("text/html");
-            //     resp.getWriter().write(result);
-            // }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NullPointerException e){

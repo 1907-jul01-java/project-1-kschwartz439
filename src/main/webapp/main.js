@@ -11,9 +11,11 @@ function login() {
                 window.location.assign("http://localhost:8080/movie-api");
             }
             if (JSONObject == "employee") {
+                localStorage.setItem("username", username);
                 window.location.assign("http://localhost:8080/movie-api/employee.html");
             }
             if (JSONObject == "manager" || JSONObject == "admin") {
+                localStorage.setItem("username", username);
                 window.location.assign("http://localhost:8080/movie-api/manager.html");
             }
         }
@@ -22,14 +24,15 @@ function login() {
     xhr.send(param);
 }
 
+let user = [];
 let WelcomeElement = document.querySelector('#WelcomeM');
 
 function updateWelcomeElement() {
-    WelcomeElement.innerHTML = ElementWelcome();
+    WelcomeElement.innerHTML = `Welcome, ${user.firstName} ${user.lastName}`;
 }   
 
 function ElementWelcome(){
-    return `Welcome ${user.firstName} ${user.lastName}`;
+    updateWelcomeElement();
 }
 
 function Logout() {
@@ -38,14 +41,17 @@ function Logout() {
 }
 
 function Signup() {
-    let username = document.getElementById("username");
-    let password = document.getElementById("password");
-    let firstName = document.getElementById("firstName");
-    let lastName = document.getElementById("lastName");
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
     var param = "username=" + username + "password=" + password + "firstName=" + firstName + "lastName=" + lastName;
     let xhr = new XMLHttpRequest();
-    xhr.open('PUT', "http://localhost:8080/movie-api/signup", true);
+    xhr.open('POST', "http://localhost:8080/movie-api/signup", true);
     xhr.setRequestHeader("Content-type", "application-x-www-form-urlencoded");
-    xhr.send(encodeURI(param));
-    window.location.assign("http://localhost:8080/movie-api");
+    xhr.send(param);
+}
+
+function Manager(){
+    window.location.assign("http://localhost:8080/movie-api/manager.html")
 }
