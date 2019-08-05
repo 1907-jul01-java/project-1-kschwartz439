@@ -24,6 +24,8 @@ public class SignUpServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        resp.setStatus(202);
+        req.getRequestDispatcher("signup1.html").forward(req, resp);
 	}
 
 	private void setUser(String username, String password, String firstName, String lastName) throws SQLException {

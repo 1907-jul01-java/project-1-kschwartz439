@@ -15,6 +15,7 @@ import com.revature.movie.api.users.User;
 
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    public HttpSession session = null;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -51,7 +52,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("userName");
         String loginpass = request.getParameter("password");
         User user = getUser(username, loginpass);
-        HttpSession session = request.getSession(false);
+        session = request.getSession(false);
         if (username == null) {
             if (session == null)
                 username = getInitParameter("userName");

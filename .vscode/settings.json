@@ -2,7 +2,6 @@
     "java.configuration.updateBuildConfiguration": "automatic",
     "sqltools.connections": [
         {
-            "askForPassword": false,
             "connectionTimeout": 30,
             "database": "reimbursement",
             "dialect": "PostgreSQL",

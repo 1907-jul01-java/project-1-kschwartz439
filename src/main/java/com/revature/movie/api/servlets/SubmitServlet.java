@@ -16,9 +16,10 @@ public class SubmitServlet extends HttpServlet{
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         String requestName = req.getParameter("requestName");
         String requestType = req.getParameter("requestType");
-        double cost = (double) Double.valueOf(req.getParameter("cost"));
+        double cost = Double.parseDouble(req.getParameter("cost"));
         String requestDescription = req.getParameter("requestDescription");
         String username = req.getParameter("username");
+        // System.out.println(requestName+ requestType+ cost+ requestDescription+ username);
         try {
             setRequest(requestName, requestType, cost, requestDescription, username);
         } catch (Exception e) {

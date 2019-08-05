@@ -56,6 +56,7 @@ public class UserDao implements Dao<User> {
                 String uname = pResultSet.getString("username");
                 String password = pResultSet.getString("password");
                 String access = pResultSet.getString("access");
+                System.out.println(access);
                 String firstName = pResultSet.getString("firstName");
                 String lastName = pResultSet.getString("lastName");
                 user = new User(uname, password, access, firstName, lastName);

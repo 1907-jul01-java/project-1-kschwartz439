@@ -12,7 +12,7 @@ import com.revature.movie.api.requests.Requests;
 
 public class RequestDao implements Dao<Requests> {
     Connection connection;
-    
+
     public RequestDao(Connection connection) {
         this.connection = connection;
     }
@@ -20,7 +20,8 @@ public class RequestDao implements Dao<Requests> {
     @Override
     public void insert(Requests request) {
         try {
-            PreparedStatement pStatement = connection.prepareStatement("insert into requests(requestName, requestType, cost, requestDescription, imageLocation, rUsersname) values(?, ?, ?, ?, ?, ?)");
+            PreparedStatement pStatement = connection.prepareStatement(
+                    "insert into requests(requestName, requestType, cost, requestDescription, imageLocation, rUsersname) values(?, ?, ?, ?, ?, ?)");
             pStatement.setString(1, request.getRequestName());
             pStatement.setString(2, request.getRequestType());
             pStatement.setDouble(3, request.getCost());
@@ -54,6 +55,7 @@ public class RequestDao implements Dao<Requests> {
                 request.setRequestType(resultSet.getString("requestType"));
                 request.setCost(resultSet.getDouble("cost"));
                 request.setRequestDescription(resultSet.getString("requestDescription"));
+                request.setApproved("approved");
                 requests.add(request);
             }
         } catch (SQLException e) {
@@ -62,9 +64,32 @@ public class RequestDao implements Dao<Requests> {
         return requests;
     }
 
-    public void setRequestObject(String requestName, String requestType, double cost, String requestDescription, String username){
+    public List<Requests> getAll() {
+        Requests request;
+        List<Requests> requests = new ArrayList<>();
         try {
-            PreparedStatement pStatement = connection.prepareStatement("insert into requests (requestName, requestType, cost, requestDescription, rUsersname, approved) values(?, ?, ?, ?, ?, ?)");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from requests");
+            while (resultSet.next()) {
+                request = new Requests();
+                request.setRequestName(resultSet.getString("requestName"));
+                request.setRequestType(resultSet.getString("requestType"));
+                request.setCost(resultSet.getDouble("cost"));
+                request.setRequestDescription(resultSet.getString("requestDescription"));
+                request.setApproved("approved");
+                requests.add(request);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return requests;
+    }
+
+    public void setRequestObject(String requestName, String requestType, double cost, String requestDescription,
+            String username) {
+        try {
+            PreparedStatement pStatement = connection.prepareStatement(
+                    "insert into requests (requestName, requestType, cost, requestDescription, rUsersname, approved) values(?, ?, ?, ?, ?, ?)");
             pStatement.setString(1, requestName);
             pStatement.setString(2, requestType);
             pStatement.setDouble(3, cost);

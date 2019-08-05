@@ -3,7 +3,7 @@ function Submit() {
     let requestType = document.getElementById("requestType").value;
     let cost = document.getElementById("cost").value;
     let requestDescription = document.getElementById("requestDescription").value;
-    let username = localStorage.getItem("username");
+    let username = sessionStorage.getItem("username");
     var param = "requestName=" + requestName + "requestType=" + requestType + "cost=" + cost + "requestDescription=" + requestDescription+"username="+username;
     let xhr = new XMLHttpRequest();
     xhr.open('POST', "http://localhost:8080/movie-api/submit", true);
@@ -42,4 +42,36 @@ function ShowRequestsManager() {
 
 function UpdateApproved() {
 
+}
+
+function getRequests(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:8080/movie-api/mrequest', true);
+    xhr.onload = function(){
+        requests = JSON.parse(xhr.responseText);
+        updateRequestElement();
+    }
+    xhr.send(param);
+}
+
+window.onload = getRequestsEM();
+
+function getRequestsEM(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8080/movie-api/requests', true);
+    let username = sessionStorage.getItem("username");
+    let param = "username="+username;
+    xhr.onload = function(){
+        requests = JSON.parse(xhr.responseText);
+        updateRequestElementEM();
+    }
+    xhr.send(param);
+}
+
+function updateRequestElementEM(){
+    RequestElement.innerHTML = ShowListRequests();
+}
+
+function updateRequestElement(){
+    RequestElement.innerHTML = ShowListRequests();
 }

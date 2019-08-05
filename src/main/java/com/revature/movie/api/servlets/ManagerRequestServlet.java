@@ -12,26 +12,25 @@ import com.revature.movie.api.ConnectionUtil;
 import com.revature.movie.api.entities.RequestDao;
 import com.revature.movie.api.requests.Requests;
 
-public class RequestServlet extends HttpServlet{
+public class ManagerRequestServlet extends HttpServlet{
     private static final long serialVersionUID = 1L;
 
     //Return all requests
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        List<Requests> request1 = null;
-        String username = req.getParameter("username");
+        List<Requests> requests = null;
         try {
-            request1 = getRequests(username);
+            requests = getRequests();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        req.setAttribute("requests", request1);
+        req.setAttribute("requests", requests);
     }
 
-    private List<Requests> getRequests(String username){
+    public List<Requests> getRequests(){
         ConnectionUtil connection = new ConnectionUtil();
         RequestDao rDao = new RequestDao(connection.getConnection());
-        List<Requests> request1 = rDao.getAll(username);
+        List<Requests> requests = rDao.getAll();
         connection.close();
-        return request1;
+        return requests;
     }
 }
